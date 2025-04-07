@@ -1,0 +1,112 @@
+drop database gestionbienes;
+create database gestionbienes;
+
+use gestionbienes;
+
+show tables;
+
+INSERT INTO usuario (nombres, apellidos, correo, contrasena, lugar, rol, status) VALUES
+('cristian', 'gonzaga', 'cris@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Oficina Central', 'ADMINISTRADOR', 'ACTIVO'),
+('amauri', 'castañeda', 'amauri@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Norte', 'RESPONSABLE', 'ACTIVO'),
+('g', 'c', 'gc@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Sur', 'BECARIO', 'ACTIVO'),
+('Ana', 'Martínez', 'ana.martinez@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Oficina Central', 'RESPONSABLE', 'ACTIVO'),
+('Luis', 'Ramírez', 'luis.ramirez@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Este', 'RESPONSABLE', 'INACTIVO'),
+('Sofía', 'Torres', 'sofia.torres@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Oeste', 'RESPONSABLE', 'ACTIVO'),
+('Pedro', 'Sánchez', 'pedro.sanchez@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Oficina Central', 'RESPONSABLE', 'INACTIVO'),
+('Laura', 'Díaz', 'laura.diaz@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Norte', 'RESPONSABLE', 'ACTIVO'),
+('Jorge', 'Ruiz', 'jorge.ruiz@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Sur', 'RESPONSABLE', 'INACTIVO'),
+('Mónica', 'Herrera', 'monica.herrera@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Oficina Central', 'RESPONSABLE', 'INACTIVO'),
+('Ricardo', 'Castro', 'ricardo.castro@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Este', 'RESPONSABLE', 'ACTIVO'),
+('Elena', 'Vargas', 'elena.vargas@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Oeste', 'RESPONSABLE', 'ACTIVO'),
+('Fernando', 'Morales', 'fernando.morales@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Oficina Central', 'BECARIO', 'INACTIVO'),
+('Gabriela', 'Ortega', 'gabriela.ortega@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Norte', 'BECARIO', 'ACTIVO'),
+('Diego', 'Rojas', 'diego.rojas@gmail.com', '$2a$12$2ALqFV6gohX4VTX4rgqWFeajQK4NJqNQ/91uwpMnBkKfFeVReD/LG', 'Sucursal Sur', 'BECARIO', 'INACTIVO');
+
+INSERT INTO area_comun (nombre_area, status) VALUES
+('Sala de Conferencias Principal', 'ACTIVO'),
+('Laboratorio de Computación A', 'ACTIVO'),
+('Biblioteca Central', 'INACTIVO'),
+('Taller de Electrónica', 'INACTIVO'),
+('Aula Magna', 'ACTIVO'),
+('Sala de Juntas Ejecutivas', 'INACTIVO'),
+('Laboratorio de Química Avanzada', 'ACTIVO'),
+('Área de Descanso Planta Baja', 'INACTIVO'),
+('Sala de Servidores', 'INACTIVO'),
+('Auditorio Principal', 'INACTIVO'),
+('Taller de Mecánica Automotriz', 'ACTIVO'),
+('Sala de Capacitación', 'ACTIVO'),
+('Laboratorio de Biología', 'ACTIVO'),
+('Área de Cafetería', 'ACTIVO'),
+('Sala de Exposiciones', 'ACTIVO');
+
+INSERT INTO marca (nombre_marca, status) VALUES
+('HP', 'ACTIVO'),
+('Dell', 'ACTIVO'),
+('Lenovo', 'INACTIVO'),
+('Apple', 'ACTIVO'),
+('Asus', 'INACTIVO'),
+('Acer', 'INACTIVO'),
+('Microsoft', 'INACTIVO'),
+('Samsung', 'ACTIVO'),
+('Sony', 'ACTIVO'),
+('Toshiba', 'ACTIVO'),
+('LG', 'INACTIVO'),
+('Huawei', 'ACTIVO'),
+('Xiaomi', 'INACTIVO'),
+('Razer', 'ACTIVO'),
+('MSI', 'INACTIVO');
+
+INSERT INTO modelo (nombre_modelo, foto, status) VALUES
+('HP EliteBook 840 G8', NULL, 'ACTIVO'),
+('Dell XPS 13 9310', NULL, 'INACTIVO'),
+('Lenovo ThinkPad X1 Carbon', NULL, 'ACTIVO'),
+('Apple MacBook Pro 16" M1', NULL, 'INACTIVO'),
+('Asus ROG Zephyrus G14', NULL, 'INACTIVO'),
+('Acer Swift 3', NULL, 'INACTIVO'),
+('Microsoft Surface Laptop 4', NULL, 'ACTIVO'),
+('Samsung Galaxy Book Pro', NULL, 'ACTIVO'),
+('Sony VAIO SX14', NULL, 'INACTIVO'),
+('Toshiba Portégé X30', NULL, 'ACTIVO'),
+('LG Gram 17', NULL, 'INACTIVO'),
+('Huawei MateBook X Pro', NULL, 'ACTIVO'),
+('Xiaomi Mi Notebook Pro', NULL, 'ACTIVO'),
+('Razer Blade 15', NULL, 'INACTIVO'),
+('MSI GS66 Stealth', NULL, 'ACTIVO');
+
+INSERT INTO tipo_bien (nombre_tipo_bien, status) VALUES
+('Computadora de Escritorio', 'ACTIVO'),
+('Laptop', 'ACTIVO'),
+('Monitor', 'INACTIVO'),
+('Teclado', 'ACTIVO'),
+('Mouse', 'ACTIVO'),
+('Impresora', 'INACTIVO'),
+('Proyector', 'ACTIVO'),
+('Escáner', 'INACTIVO'),
+('Tableta', 'ACTIVO'),
+('Teléfono IP', 'INACTIVO'),
+('Servidor', 'ACTIVO'),
+('Router', 'INACTIVO'),
+('Switch', 'INACTIVO'),
+('Disco Duro Externo', 'ACTIVO'),
+('Cámara de Seguridad', 'INACTIVO');
+
+INSERT INTO bien (codigo, numero_serie, id_tipo_bien, id_marca, id_modelo, id_area_comun, status, disponibilidad, motivo)
+VALUES
+  ('BIEN-001', 'SERIE-001', 2, 1, 1, 1, 'ACTIVO', 'DISPONIBLE', ''),
+  ('BIEN-002', 'SERIE-002', 1, 2, 2, 2, 'ACTIVO', 'DISPONIBLE', ''),
+  ('BIEN-003', 'SERIE-003', 3, 3, 3, 3, 'ACTIVO', 'DISPONIBLE', ''),
+  ('BIEN-004', 'SERIE-004', 4, 4, 4, 4, 'ACTIVO', 'DISPONIBLE', ''),
+  ('BIEN-005', 'SERIE-005', 5, 5, 5, 5, 'ACTIVO', 'DISPONIBLE', ''),
+  ('BIEN-006', 'SERIE-006', 6, 6, 6, 6, 'INACTIVO', 'OCUPADO', ''),
+  ('BIEN-007', 'SERIE-007', 7, 7, 7, 7, 'INACTIVO', 'OCUPADO', ''),
+  ('BIEN-008', 'SERIE-008', 8, 8, 8, 8, 'INACTIVO', 'OCUPADO', ''),
+  ('BIEN-009', 'SERIE-009', 9, 9, 9, 9, 'ACTIVO', 'OCUPADO', ''),
+  ('BIEN-010', 'SERIE-010', 10, 10, 10, 11, 'INACTIVO', 'OCUPADO', '');
+
+INSERT INTO asignaciones (usuario_id, bien_id, status)
+VALUES
+  (3, 6, 'ACTIVO'),  -- Asignación de BIEN-006 a Pedro (BECARIO)
+  (13, 7, 'ACTIVO'),  -- Asignación de BIEN-007 a Mónica (BECARIO)
+  (13, 8, 'INACTIVO'),  -- Asignación de BIEN-008 a Fernando (BECARIO)
+  (14, 9, 'INACTIVO'),  -- Asignación de BIEN-009 a Gabriela (BECARIO)
+  (15, 10, 'ACTIVO');  -- Asignación de BIEN-010 a Diego (BECARIO)
