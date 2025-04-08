@@ -6,6 +6,7 @@ import com.sisgebi.repository.TipoBienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class TipoBienService {
     }
 
     // Obtener tipo de bien por ID
-    public Optional<TipoBien> getById(Long id) {
+    public Optional<TipoBien> getById(String id) {
         return tipoBienRepository.findById(id);
     }
 
@@ -35,7 +36,7 @@ public class TipoBienService {
     }
 
     // Actualizar tipo de bien
-    public TipoBien update(Long id, TipoBien tipoBien) {
+    public TipoBien update(String id, TipoBien tipoBien) {
         if (tipoBienRepository.existsById(id)) {
             tipoBien.setTipoBienId(id);
             return tipoBienRepository.save(tipoBien);
@@ -44,7 +45,7 @@ public class TipoBienService {
     }
 
     // Eliminar tipo de bien
-    public void delete(Long id) {
+    public void delete(String id) {
         Optional<TipoBien> tipoBienOptional = tipoBienRepository.findById(id);
         if (tipoBienOptional.isPresent()) {
             TipoBien tipoBien = tipoBienOptional.get();
@@ -56,7 +57,7 @@ public class TipoBienService {
     }
 
     // Filtrar tipos de bien según ID y/o estado
-    public List<TipoBien> filter(Long tipoBienId, Status status) {
+    public List<TipoBien> filter(String tipoBienId, Status status) {
         if (tipoBienId != null && status != null) {
             return tipoBienRepository.findByTipoBienIdAndStatus(tipoBienId, status); // Filtra por tipo de bien y estado
         } else if (tipoBienId != null) {

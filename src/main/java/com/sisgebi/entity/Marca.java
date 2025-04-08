@@ -1,48 +1,44 @@
 package com.sisgebi.entity;
 
 import com.sisgebi.enums.Status;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "marca")
+@Document(collection = "marca")
 public class Marca {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long marcaId;
+    private String marcaId;
 
     @NotBlank(message = "El nombre de la marca es obligatorio")
-    @Column(name = "nombre_marca", nullable = false, unique = true)
     private String nombreMarca;
 
     @NotNull(message = "El estado de la marca es obligatorio")
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Status status;
 
-    public Long getMarcaId() {
+    public String getMarcaId() {
         return marcaId;
     }
 
-    public void setMarcaId(Long marcaId) {
+    public void setMarcaId(String marcaId) {
         this.marcaId = marcaId;
     }
 
-    public @NotBlank(message = "El nombre de la marca es obligatorio") String getNombreMarca() {
+    public String getNombreMarca() {
         return nombreMarca;
     }
 
-    public void setNombreMarca(@NotBlank(message = "El nombre de la marca es obligatorio") String nombreMarca) {
+    public void setNombreMarca(String nombreMarca) {
         this.nombreMarca = nombreMarca;
     }
 
-    public @NotNull(message = "El estado de la marca es obligatorio") Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(@NotNull(message = "El estado de la marca es obligatorio") Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

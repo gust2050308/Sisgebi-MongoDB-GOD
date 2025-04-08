@@ -34,7 +34,7 @@ public class AsignacionesService {
     }
 
     // Obtener una asignación por ID
-    public Asignaciones getAsignacionById(Long id) {
+    public Asignaciones getAsignacionById(String  id) {
         return asignacionesRepository.findById(id).orElse(null);
     }
 
@@ -65,7 +65,7 @@ public class AsignacionesService {
     }
 
     // Actualizar una asignación
-    public Asignaciones updateAsignacion(Long id, Asignaciones asignacion) {
+    public Asignaciones updateAsignacion(String id, Asignaciones asignacion) {
         if (asignacionesRepository.existsById(id)) {
             Usuario usuario = asignacion.getUsuario();
             asignacion.setAsignacionesId(id);
@@ -75,7 +75,7 @@ public class AsignacionesService {
     }
 
     // Eliminar una asignación y liberar el bien
-    public void delete(Long id) {
+    public void delete(String id) {
         Optional<Asignaciones> asignacionesOptional = asignacionesRepository.findById(id);
         if (asignacionesOptional.isPresent()) {
             Asignaciones asignacion = asignacionesOptional.get();
@@ -94,7 +94,7 @@ public class AsignacionesService {
     }
 
     // Filtrar asignaciones por usuario y/o estado
-    public List<Asignaciones> filter(Long id, Status status) {
+    public List<Asignaciones> filter(String id, Status status) {
         if (id != null && status != null) {
             return asignacionesRepository.findByStatusAndUsuarioId(status, id);
         } else if (id != null) {

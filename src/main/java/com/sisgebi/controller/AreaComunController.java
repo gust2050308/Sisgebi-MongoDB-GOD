@@ -30,7 +30,7 @@ public class AreaComunController {
 
     // Obtener área por ID
     @GetMapping("/{id}")
-    public Optional<AreaComun> getById(@PathVariable Long id) {
+    public Optional<AreaComun> getById(@PathVariable String id) {
         return areaComunService.getById(id);
     }
 
@@ -42,13 +42,13 @@ public class AreaComunController {
 
     // Actualizar área
     @PutMapping("/{id}")
-    public AreaComun update(@PathVariable Long id, @RequestBody AreaComun areaComun) {
+    public AreaComun update(@PathVariable String id, @RequestBody AreaComun areaComun) {
         return areaComunService.update(id, areaComun);
     }
 
     // Eliminar área
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAreaComun(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAreaComun(@PathVariable String id) {
         try {
             areaComunService.delete(id);
             return ResponseEntity.noContent().build();
@@ -59,7 +59,7 @@ public class AreaComunController {
 
     // Filtro para buscar áreas por nombre y estado
     @GetMapping("/filter")
-    public List<AreaComun> filter(@RequestParam(required = false) Long areaId,
+    public List<AreaComun> filter(@RequestParam(required = false) String areaId,
                                   @RequestParam(required = false) Status status) {
         return areaComunService.filter(areaId, status);
     }

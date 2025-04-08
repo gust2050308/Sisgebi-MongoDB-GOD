@@ -1,44 +1,38 @@
 package com.sisgebi.entity;
 
 import com.sisgebi.enums.Status;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "modelo")
+@Document(collection = "modelo")
 public class Modelo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long modeloId;
+    private String modeloId;
 
     @NotBlank(message = "El nombre del modelo es obligatorio")
-    @Column(name = "nombre_modelo", nullable = false, unique = true)
     private String nombreModelo;
 
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
     private byte[] foto;
 
     @NotNull(message = "El estado del modelo es obligatorio")
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Status status;
 
-    public Long getModeloId() {
+    public String getModeloId() {
         return modeloId;
     }
 
-    public void setModeloId(Long modeloId) {
+    public void setModeloId(String modeloId) {
         this.modeloId = modeloId;
     }
 
-    public @NotBlank(message = "El nombre del modelo es obligatorio") String getNombreModelo() {
+    public String getNombreModelo() {
         return nombreModelo;
     }
 
-    public void setNombreModelo(@NotBlank(message = "El nombre del modelo es obligatorio") String nombreModelo) {
+    public void setNombreModelo(String nombreModelo) {
         this.nombreModelo = nombreModelo;
     }
 
@@ -50,11 +44,11 @@ public class Modelo {
         this.foto = foto;
     }
 
-    public @NotNull(message = "El estado del modelo es obligatorio") Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(@NotNull(message = "El estado del modelo es obligatorio") Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

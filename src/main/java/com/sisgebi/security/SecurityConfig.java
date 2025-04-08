@@ -30,7 +30,10 @@ public class  SecurityConfig {
                     // Lista todos los orígenes permitidos en una sola llamada
                     corsConfig.setAllowedOrigins(java.util.List.of(
                             "http://localhost:5173",  // Frontend web (Vite/React)
-                            "http://localhost:8081"   // React Native
+                            "http://localhost:8081",  // React Native
+                            "http://localhost:5174",
+                            "http://localhost:5175",
+                            "http://localhost:5176"
                     ));
                     corsConfig.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfig.setAllowedHeaders(java.util.List.of("*"));
@@ -40,7 +43,7 @@ public class  SecurityConfig {
                 }))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session

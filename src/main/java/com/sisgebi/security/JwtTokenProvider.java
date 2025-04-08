@@ -13,7 +13,7 @@ public class JwtTokenProvider {
     private final String SECRET_KEY = "z2/xmfwvIfoCpwhf3oIigofeYFuxL8F3g4Vy9jIOCTR1iQ+oUbVnqu8aE2WYFmfqt4x5n97yV1firAmOlQ32uQ==";
     private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hora
 
-    public String generateToken(String email, String role, Long id, String nombres, String apellidos) { // Ahora recibe email, rol y id
+    public String generateToken(String email, String role, String id, String nombres, String apellidos) { // Ahora recibe email, rol y id
         return Jwts.builder()
                 .setSubject(email) // Guarda el correo en el token
                 .claim("role", role) // Agrega el rol como un claim adicional

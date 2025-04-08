@@ -2,91 +2,40 @@ package com.sisgebi.entity;
 
 import com.sisgebi.enums.Disponibilidad;
 import com.sisgebi.enums.Status;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "bien")
+@Document(collection = "bien")
 public class Bien {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bienId;
+    private String bienId;
 
     @NotBlank(message = "El código del bien es obligatorio")
-    @Column(nullable = false, unique = true)
     private String codigo;
 
     @NotBlank(message = "El número de serie es obligatorio")
-    @Column(nullable = false, unique = true)
     private String numeroSerie;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
-
-    @ManyToOne
-    @JoinColumn(name = "id_tipo_bien", nullable = false)
+    @DBRef
     private TipoBien tipoBien;
 
-    @ManyToOne
-    @JoinColumn(name = "id_marca", nullable = false)
+    @DBRef
     private Marca marca;
 
-    @ManyToOne
-    @JoinColumn(name = "id_modelo", nullable = false)
+    @DBRef
     private Modelo modelo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_area_comun", nullable = true)
+    @DBRef
     private AreaComun areaComun;
 
-    @NotNull(message = "El estado del bien es obligatorio")
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Status status;
-
-    @NotNull(message = "La disponibilidad del bien es obligatoria")
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Disponibilidad disponibilidad;
-
-    @Column(nullable = true)
-    private String motivo;
-
-    private LocalDateTime deleteAt;
-
-    @PreUpdate
-    protected void onDelete() {
-        this.deleteAt = LocalDateTime.now();
-    }
-
-    public Long getBienId() {
-        return bienId;
-    }
-
-    public void setBienId(Long bienId) {
-        this.bienId = bienId;
-    }
-
-    public @NotBlank(message = "El código del bien es obligatorio") String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(@NotBlank(message = "El código del bien es obligatorio") String codigo) {
-        this.codigo = codigo;
-    }
-
-    public @NotBlank(message = "El número de serie es obligatorio") String getNumeroSerie() {
-        return numeroSerie;
-    }
-
-    public void setNumeroSerie(@NotBlank(message = "El número de serie es obligatorio") String numeroSerie) {
-        this.numeroSerie = numeroSerie;
-    }
+    @DBRef
+    private Usuario usuario;
 
     public Usuario getUsuario() {
         return usuario;
@@ -94,6 +43,40 @@ public class Bien {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    @NotNull(message = "El estado del bien es obligatorio")
+    private Status status;
+
+    @NotNull(message = "La disponibilidad del bien es obligatoria")
+    private Disponibilidad disponibilidad;
+
+    private String motivo;
+
+    private LocalDateTime deleteAt;
+
+    public String getBienId() {
+        return bienId;
+    }
+
+    public void setBienId(String bienId) {
+        this.bienId = bienId;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNumeroSerie() {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
     }
 
     public TipoBien getTipoBien() {
@@ -128,19 +111,19 @@ public class Bien {
         this.areaComun = areaComun;
     }
 
-    public @NotNull(message = "El estado del bien es obligatorio") Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(@NotNull(message = "El estado del bien es obligatorio") Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public @NotNull(message = "La disponibilidad del bien es obligatoria") Disponibilidad getDisponibilidad() {
+    public Disponibilidad getDisponibilidad() {
         return disponibilidad;
     }
 
-    public void setDisponibilidad(@NotNull(message = "La disponibilidad del bien es obligatoria") Disponibilidad disponibilidad) {
+    public void setDisponibilidad(Disponibilidad disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 
@@ -158,5 +141,10 @@ public class Bien {
 
     public void setDeleteAt(LocalDateTime deleteAt) {
         this.deleteAt = deleteAt;
+    }
+
+    // Puedes llamar este método manualmente antes de guardar para simular lógica de borrado
+    public void markAsDeleted() {
+        this.deleteAt = LocalDateTime.now();
     }
 }

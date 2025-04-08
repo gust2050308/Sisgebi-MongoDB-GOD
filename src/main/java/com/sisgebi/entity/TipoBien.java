@@ -1,48 +1,44 @@
 package com.sisgebi.entity;
 
 import com.sisgebi.enums.Status;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "tipo_bien")
+@Document(collection = "tipo_bien")
 public class TipoBien {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tipoBienId;
+    private String tipoBienId;
 
     @NotBlank(message = "El nombre del tipo de bien es obligatorio")
-    @Column(name = "nombre_tipo_bien", nullable = false, unique = true)
     private String nombreTipoBien;
 
     @NotNull(message = "El estado del tipo de bien es obligatorio")
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Status status;
 
-    public Long getTipoBienId() {
+    public String getTipoBienId() {
         return tipoBienId;
     }
 
-    public void setTipoBienId(Long tipoBienId) {
+    public void setTipoBienId(String tipoBienId) {
         this.tipoBienId = tipoBienId;
     }
 
-    public @NotBlank(message = "El nombre del tipo de bien es obligatorio") String getNombreTipoBien() {
+    public String getNombreTipoBien() {
         return nombreTipoBien;
     }
 
-    public void setNombreTipoBien(@NotBlank(message = "El nombre del tipo de bien es obligatorio") String nombreTipoBien) {
+    public void setNombreTipoBien(String nombreTipoBien) {
         this.nombreTipoBien = nombreTipoBien;
     }
 
-    public @NotNull(message = "El estado del tipo de bien es obligatorio") Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(@NotNull(message = "El estado del tipo de bien es obligatorio") Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

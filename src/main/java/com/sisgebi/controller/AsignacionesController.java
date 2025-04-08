@@ -25,7 +25,7 @@ public class AsignacionesController {
 
     // Obtener una asignación por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Asignaciones> getAsignacionById(@PathVariable Long id) {
+    public ResponseEntity<Asignaciones> getAsignacionById(@PathVariable String id) {
         Asignaciones asignacion = asignacionesService.getAsignacionById(id);
         return asignacion != null ? ResponseEntity.ok(asignacion) : ResponseEntity.notFound().build();
     }
@@ -39,14 +39,14 @@ public class AsignacionesController {
 
     // Actualizar una asignación (solo para RESPONSABLES y BECARIOS)
     @PutMapping("/{id}")
-    public ResponseEntity<Asignaciones> updateAsignacion(@PathVariable Long id, @RequestBody Asignaciones asignacion) {
+    public ResponseEntity<Asignaciones> updateAsignacion(@PathVariable String id, @RequestBody Asignaciones asignacion) {
         Asignaciones updatedAsignacion = asignacionesService.updateAsignacion(id, asignacion);
         return updatedAsignacion != null ? ResponseEntity.ok(updatedAsignacion) : ResponseEntity.notFound().build();
     }
 
     // Eliminar una asignación
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAsignacion(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAsignacion(@PathVariable String id) {
         try {
             asignacionesService.delete(id);
             return ResponseEntity.noContent().build();
@@ -58,7 +58,7 @@ public class AsignacionesController {
     // Filtrar usuarios
     @GetMapping("/filter")
     public List<Asignaciones> filter(@RequestParam(required = false) Status status,
-                                     @RequestParam(required = false) Long id) {
+                                     @RequestParam(required = false) String id) {
         return asignacionesService.filter(id, status);
     }
 }

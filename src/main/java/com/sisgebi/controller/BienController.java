@@ -27,7 +27,7 @@ public class BienController {
 
     // Obtener un bien por id
     @GetMapping("/{id}")
-    public ResponseEntity<Bien> getBienById(@PathVariable Long id) {
+    public ResponseEntity<Bien> getBienById(@PathVariable String id) {
         Optional<Bien> bien = bienService.getBienById(id);
         return bien.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -41,14 +41,14 @@ public class BienController {
 
     // Actualizar un bien
     @PutMapping("/{id}")
-    public ResponseEntity<Bien> updateBien(@PathVariable Long id, @RequestBody Bien bien) {
+    public ResponseEntity<Bien> updateBien(@PathVariable String id, @RequestBody Bien bien) {
         Bien updatedBien = bienService.updateBien(id, bien);
         return updatedBien != null ? ResponseEntity.ok(updatedBien) : ResponseEntity.notFound().build();
     }
 
     // Eliminar un bien con motivo
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBien(@PathVariable Long id, @RequestParam String motivo) {
+    public ResponseEntity<Void> deleteBien(@PathVariable String id, @RequestParam String motivo) {
         try {
             bienService.deleteBien(id, motivo);
             return ResponseEntity.noContent().build();
@@ -59,12 +59,12 @@ public class BienController {
 
     @GetMapping("/filter")
     public ResponseEntity<List<Bien>> filterBienes(
-            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String id,
             @RequestParam(required = false) String codigo,
-            @RequestParam(required = false) Long tipoBienId,
-            @RequestParam(required = false) Long marcaId,
-            @RequestParam(required = false) Long modeloId,
-            @RequestParam(required = false) Long areaId,
+            @RequestParam(required = false) String tipoBienId,
+            @RequestParam(required = false) String marcaId,
+            @RequestParam(required = false) String  modeloId,
+            @RequestParam(required = false) String areaId,
             @RequestParam(required = false) Status status,
             @RequestParam(required = false) Disponibilidad disponibilidad) {
 

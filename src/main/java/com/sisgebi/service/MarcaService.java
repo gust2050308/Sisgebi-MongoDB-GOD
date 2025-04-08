@@ -21,7 +21,7 @@ public class MarcaService {
     }
 
     // Obtener una marca por ID
-    public Optional<Marca> getById(Long marcaId) {
+    public Optional<Marca> getById(String marcaId) {
         return marcaRepository.findById(marcaId);
     }
 
@@ -31,7 +31,7 @@ public class MarcaService {
     }
 
     // Actualizar una marca existente
-    public Marca update(Long marcaId, Marca marca) {
+    public Marca update(String marcaId, Marca marca) {
         if (marcaRepository.existsById(marcaId)) {
             marca.setMarcaId(marcaId);
             return marcaRepository.save(marca);
@@ -40,7 +40,7 @@ public class MarcaService {
     }
 
     // Eliminar una marca por ID
-    public void delete(Long id) {
+    public void delete(String id) {
         Optional<Marca> marcaOptional = marcaRepository.findById(id);
         if (marcaOptional.isPresent()) {
             Marca marca = marcaOptional.get();
@@ -52,7 +52,7 @@ public class MarcaService {
     }
 
     // Filtrar marcas según ID y/o estado
-    public List<Marca> filter(Long marcaId, Status status) {
+    public List<Marca> filter(String marcaId, Status status) {
         if (marcaId != null && status != null) {
             return marcaRepository.findBymarcaIdAndStatus(marcaId, status); // Filtra por marca y estado
         } else if (marcaId != null) {

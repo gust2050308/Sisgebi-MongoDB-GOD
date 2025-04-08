@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.rowset.serial.SerialStruct;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class MarcaController {
 
     // Obtener marca por ID
     @GetMapping("/{id}")
-    public Optional<Marca> getById(@PathVariable Long id) {
+    public Optional<Marca> getById(@PathVariable String id) {
         return marcaService.getById(id);
     }
 
@@ -38,13 +39,13 @@ public class MarcaController {
 
     // Actualizar una marca existente
     @PutMapping("/{id}")
-    public Marca update(@PathVariable Long id, @RequestBody Marca marca) {
+    public Marca update(@PathVariable String id, @RequestBody Marca marca) {
         return marcaService.update(id, marca);
     }
 
     // Eliminar una marca
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMarca(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMarca(@PathVariable String id) {
         try {
             marcaService.delete(id);
             return ResponseEntity.noContent().build();
@@ -55,7 +56,7 @@ public class MarcaController {
 
     // Filtrar marcas
     @GetMapping("/filter")
-    public List<Marca> filter(@RequestParam(required = false) Long marcaId,
+    public List<Marca> filter(@RequestParam(required = false) String marcaId,
                               @RequestParam(required = false) Status status) {
         return marcaService.filter(marcaId, status);
     }

@@ -2,16 +2,16 @@ package com.sisgebi.repository;
 
 import com.sisgebi.entity.TipoBien;
 import com.sisgebi.enums.Status;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface TipoBienRepository extends JpaRepository<TipoBien, Long> {
+public interface TipoBienRepository extends MongoRepository<TipoBien, String> {
 
     // Filtrar por ID de tipo de bien y estado
-    List<TipoBien> findByTipoBienIdAndStatus(Long tipoBienId, Status status);
+    List<TipoBien> findByTipoBienIdAndStatus(String tipoBienId, Status status);
 
     // Filtrar solo por estado
     List<TipoBien> findByStatus(Status status);

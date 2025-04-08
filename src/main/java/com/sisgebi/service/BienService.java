@@ -29,7 +29,7 @@ public class BienService {
     }
 
     // Obtener bien por id
-    public Optional<Bien> getBienById(Long id) {
+    public Optional<Bien> getBienById(String id) {
         return bienRepository.findById(id);
     }
 
@@ -39,7 +39,7 @@ public class BienService {
     }
 
     // Actualizar bien
-    public Bien updateBien(Long id, Bien bien) {
+    public Bien updateBien(String id, Bien bien) {
         if (bienRepository.existsById(id)) {
             bien.setBienId(id);
             return bienRepository.save(bien);
@@ -48,7 +48,7 @@ public class BienService {
     }
 
     // Eliminar bien (borrado lógico con motivo)
-    public void deleteBien(Long id, String motivo) {
+    public void deleteBien(String id, String motivo) {
         Optional<Bien> bienOptional = bienRepository.findById(id);
         if (bienOptional.isPresent()) {
             Bien bien = bienOptional.get();
@@ -62,8 +62,14 @@ public class BienService {
     }
 
     // Filtrar bienes según varios atributos
-    public List<Bien> filter(Long id, String codigo, Long tipoBienId, Long marcaId, Long modeloId,
-                             Long areaId, Status status, Disponibilidad disponibilidad) {
-        return bienRepository.filter(id, codigo, tipoBienId, marcaId, modeloId, areaId, status, disponibilidad);
+    public List<Bien> filter(String id,
+                             String codigo,
+                             String  tipoBienId,
+                             String marcaId,
+                             String modeloId,
+                             String areaId,
+                             Status status,
+                             Disponibilidad disponibilidad) {
+        return bienRepository.filterBienes(id, codigo, tipoBienId, marcaId, modeloId, areaId, status, disponibilidad);
     }
 }

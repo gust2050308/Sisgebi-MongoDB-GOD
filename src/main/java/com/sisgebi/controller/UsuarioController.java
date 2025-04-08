@@ -36,7 +36,7 @@ public class UsuarioController {
 
     // Obtener un usuario por id
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id) {
+    public ResponseEntity<Usuario> getUsuarioById(@PathVariable String id) {
         Optional<Usuario> usuario = usuarioService.getUsuarioById(id);
         return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -50,14 +50,14 @@ public class UsuarioController {
 
     // Actualizar un usuario
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> updateUsuario(@PathVariable String id, @RequestBody Usuario usuario) {
         Usuario updatedUsuario = usuarioService.updateUsuario(id, usuario);
         return updatedUsuario != null ? ResponseEntity.ok(updatedUsuario) : ResponseEntity.notFound().build();
     }
 
     // Eliminar un usuario
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUsuario(@PathVariable String id) {
         try {
             usuarioService.deleteUsuario(id);
             return ResponseEntity.noContent().build();

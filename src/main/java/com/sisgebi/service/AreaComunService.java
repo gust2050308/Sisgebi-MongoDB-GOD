@@ -21,7 +21,7 @@ public class AreaComunService {
     }
 
     // Obtener área por ID
-    public Optional<AreaComun> getById(Long id) {
+    public Optional<AreaComun> getById(String id) {
         return areaComunRepository.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class AreaComunService {
     }
 
     // Actualizar área
-    public AreaComun update(Long id, AreaComun areaComun) {
+    public AreaComun update(String id, AreaComun areaComun) {
         if (areaComunRepository.existsById(id)) {
             areaComun.setAreaId(id);
             return areaComunRepository.save(areaComun);
@@ -40,7 +40,7 @@ public class AreaComunService {
     }
 
     // Eliminar área
-    public void delete(Long id) {
+    public void delete(String id) {
         Optional<AreaComun> areaComunOptional = areaComunRepository.findById(id);
         if (areaComunOptional.isPresent()) {
             AreaComun areaComun = areaComunOptional.get();
@@ -52,9 +52,9 @@ public class AreaComunService {
     }
 
     // Filtrar áreas comunes según ID y/o estado
-    public List<AreaComun> filter(Long areaId, Status status) {
+    public List<AreaComun> filter(String areaId, Status status) {
         if (areaId != null && status != null) {
-            return areaComunRepository.findByareaIdAndStatus(areaId, status); // Filtra por areaComun y estado
+            return areaComunRepository.findByAreaIdAndStatus(areaId, status); // Filtra por areaComun y estado
         } else if (areaId != null) {
             return areaComunRepository.findById(areaId).map(List::of).orElse(List.of()); // Filtra solo por areaComun
         } else if (status != null) {

@@ -26,7 +26,7 @@ public class UsuarioService {
     }
 
     // Obtener usuario por id
-    public Optional<Usuario> getUsuarioById(Long id) {
+    public Optional<Usuario> getUsuarioById(String id) {
         return usuarioRepository.findById(id);
     }
 
@@ -39,7 +39,7 @@ public class UsuarioService {
     }
 
     // Actualizar usuario
-    public Usuario updateUsuario(Long id, Usuario usuario) {
+    public Usuario updateUsuario(String id, Usuario usuario) {
         if (usuarioRepository.existsById(id)) {
             Optional<Usuario> existingUsuarioOptional = usuarioRepository.findById(id);
             if (existingUsuarioOptional.isPresent()) {
@@ -66,7 +66,7 @@ public class UsuarioService {
     }
 
     // Eliminar usuario (eliminación lógica)
-    public void deleteUsuario(Long id) {
+    public void deleteUsuario(String id) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();

@@ -21,13 +21,13 @@ public class ModeloService {
     }
 
     // Obtener modelo por ID
-    public Optional<Modelo> getById(Long id) {
+    public Optional<Modelo> getById(String id) {
         return modeloRepository.findById(id);
     }
 
 
     // Añade este método que falta
-    public Modelo findById(Long id) {
+    public Modelo findById(String  id) {
         return modeloRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Modelo no encontrado"));
     }
@@ -38,7 +38,7 @@ public class ModeloService {
     }
 
     // Actualizar modelo
-    public Modelo update(Long id, Modelo modelo) {
+    public Modelo update(String id, Modelo modelo) {
         if (modeloRepository.existsById(id)) {
             modelo.setModeloId(id);
             return modeloRepository.save(modelo);
@@ -47,7 +47,7 @@ public class ModeloService {
     }
 
     // Eliminar modelo
-    public void delete(Long id) {
+    public void delete(String id) {
         Optional<Modelo> modeloOptional = modeloRepository.findById(id);
         if (modeloOptional.isPresent()) {
             Modelo modelo = modeloOptional.get();
@@ -59,7 +59,7 @@ public class ModeloService {
     }
 
     // Filtrar modelos por ID y/o estado
-    public List<Modelo> filter(Long modeloId, Status status) {
+    public List<Modelo> filter(String modeloId, Status status) {
         if (modeloId != null && status != null) {
             return modeloRepository.findBymodeloIdAndStatus(modeloId, status); // Filtra por modelo y estado
         } else if (modeloId != null) {

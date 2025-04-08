@@ -3,6 +3,7 @@ package com.sisgebi.controller;
 import com.sisgebi.entity.Modelo;
 import com.sisgebi.enums.Status;
 import com.sisgebi.service.ModeloService;
+import jakarta.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class ModeloController {
 
     // Obtener modelo por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Modelo> getById(@PathVariable Long id) {
+    public ResponseEntity<Modelo> getById(@PathVariable String id) {
         Optional<Modelo> modelo = modeloService.getById(id);
         return modelo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -63,7 +64,7 @@ public class ModeloController {
     // Actualizar modelo
     @PutMapping(value = "/{id}", consumes = "multipart/form-data")
     public ResponseEntity<Modelo> update(
-            @PathVariable Long id,
+            @PathVariable String id,
             @RequestParam("nombreModelo") String nombreModelo,
             @RequestParam("status") Status status,
             @RequestParam(value = "foto", required = false) MultipartFile foto) {
@@ -90,7 +91,7 @@ public class ModeloController {
 
     // Eliminar modelo
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteModelo(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteModelo(@PathVariable String id) {
         try {
             modeloService.delete(id);
             return ResponseEntity.noContent().build();
@@ -102,7 +103,7 @@ public class ModeloController {
     // Filtrar modelos
     @GetMapping("/filter")
     public List<Modelo> filter(@RequestParam(required = false) Status status,
-                               @RequestParam(required = false) Long modeloId) {
+                               @RequestParam(required = false) String modeloId) {
         return modeloService.filter(modeloId, status);
     }
 }

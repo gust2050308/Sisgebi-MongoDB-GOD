@@ -1,48 +1,44 @@
 package com.sisgebi.entity;
 
 import com.sisgebi.enums.Status;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "area_comun")
+@Document(collection = "area_comun") // Nombre de la colección en MongoDB
 public class AreaComun {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long areaId;
+    private String areaId; // MongoDB usa String por default para el ID
 
     @NotBlank(message = "El nombre del área es obligatorio")
-    @Column(name = "nombre_area", nullable = false, unique = true)
     private String nombreArea;
 
     @NotNull(message = "El estado del área es obligatorio")
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Status status;
 
-    public Long getAreaId() {
+    public String getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(Long areaId) {
+    public void setAreaId(String areaId) {
         this.areaId = areaId;
     }
 
-    public @NotBlank(message = "El nombre del área es obligatorio") String getNombreArea() {
+    public String getNombreArea() {
         return nombreArea;
     }
 
-    public void setNombreArea(@NotBlank(message = "El nombre del área es obligatorio") String nombreArea) {
+    public void setNombreArea(String nombreArea) {
         this.nombreArea = nombreArea;
     }
 
-    public @NotNull(message = "El estado del área es obligatorio") Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(@NotNull(message = "El estado del área es obligatorio") Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

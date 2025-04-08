@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class TipoBienController {
 
     // Obtener tipo de bien por ID
     @GetMapping("/{id}")
-    public ResponseEntity<TipoBien> getById(@PathVariable Long id) {
+    public ResponseEntity<TipoBien> getById(@PathVariable String id) {
         Optional<TipoBien> tipoBien = tipoBienService.getById(id);
         return tipoBien.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -44,14 +45,14 @@ public class TipoBienController {
 
     // Actualizar tipo de bien
     @PutMapping("/{id}")
-    public ResponseEntity<TipoBien> update(@PathVariable Long id, @RequestBody TipoBien tipoBien) {
+    public ResponseEntity<TipoBien> update(@PathVariable String id, @RequestBody TipoBien tipoBien) {
         TipoBien updatedTipoBien = tipoBienService.update(id, tipoBien);
         return updatedTipoBien != null ? ResponseEntity.ok(updatedTipoBien) : ResponseEntity.notFound().build();
     }
 
     // Eliminar tipo de bien
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTipoBien(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTipoBien(@PathVariable String id) {
         try {
             tipoBienService.delete(id);
             return ResponseEntity.noContent().build();
@@ -62,7 +63,7 @@ public class TipoBienController {
 
     // Filtrar tipos de bien
     @GetMapping("/filter")
-    public List<TipoBien> filter(@RequestParam(required = false) Long tipoBienId,
+    public List<TipoBien> filter(@RequestParam(required = false) String tipoBienId,
                                  @RequestParam(required = false) Status status) {
         return tipoBienService.filter(tipoBienId, status);
     }
