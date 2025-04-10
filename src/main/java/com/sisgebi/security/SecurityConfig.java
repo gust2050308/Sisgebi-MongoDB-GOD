@@ -29,12 +29,17 @@ public class  SecurityConfig {
                     var corsConfig = new org.springframework.web.cors.CorsConfiguration();
                     // Lista todos los orígenes permitidos en una sola llamada
                     corsConfig.setAllowedOrigins(java.util.List.of(
-                            "http://localhost:5173",  // Frontend web (Vite/React)
-                            "http://localhost:8081",  // React Native
-                            "http://localhost:5174",
-                            "http://localhost:5175",
-                            "http://localhost:5176"
+                            "http://44.203.151.234:5173",
+                            "http://44.203.151.234:8081",
+                            "http://44.203.151.234:5174",
+                            "http://44.203.151.234:5175",
+                            "http://44.203.151.234:5176",
+                            "http://10.0.1.62:5173",
+                            "http://10.0.1.62:5174",
+                            "http://10.0.1.62:5175",
+                            "http://10.0.1.62:5176"// 👈 agrega esto
                     ));
+
                     corsConfig.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfig.setAllowedHeaders(java.util.List.of("*"));
                     corsConfig.setAllowCredentials(true);
@@ -43,7 +48,7 @@ public class  SecurityConfig {
                 }))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login").permitAll()
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session
